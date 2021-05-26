@@ -69,5 +69,20 @@ const test = async(req, res) => {
     res.json(t);
 }
 
+const name = async(req, res) => {
+    const token = req.query.access_token;
+    console.log("----------- get name with token " + token);
+    const url = "https://api.spotify.com/v1/me";
+    const options = {
+        method: "GET",
+        headers: { 'content-type': 'application/json', 'Accept': 'application/json', 'Authorization': `Bearer ${token}` },
+    };
+    let result = await fetch(url, options);
+    let json = await result.json();
+    console.log(json);
+    res.json(json);
+}
+
 exports.test = test;
 exports.loadLibrary = loadLibrary;
+exports.name = name;

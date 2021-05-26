@@ -31,6 +31,13 @@ class Api {
     log("emit start mash: $sessionId ");
   }
 
+  static Future<String> getDisplayName(String token) async {
+    final url = Constants.HOST + '/api/name/?access_token=${token}';
+    final res = await dio.get(url);
+    final data = Map<String, dynamic>.from(res.data as Map<dynamic, dynamic>);
+    return data["display_name"] as String;
+  }
+
   static Future<List<SpotifyTrack>> loadMoreTracks(String sessionId,
       {required int offset, required int amount}) async {
     final url = Constants.HOST +

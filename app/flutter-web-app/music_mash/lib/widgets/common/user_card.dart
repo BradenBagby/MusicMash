@@ -11,14 +11,14 @@ class UserCard extends StatelessWidget {
         ClipOval(
           child: Container(
             color: Theme.of(context).primaryColorLight,
-            height: 50,
-            width: 50,
+            height: 150,
+            width: 150,
             child: Center(
               child: Text(
                 user.name,
                 style: Theme.of(context)
                     .textTheme
-                    .headline4!
+                    .headline6!
                     .merge(TextStyle(fontWeight: FontWeight.bold)),
                 textAlign: TextAlign.center,
               ),

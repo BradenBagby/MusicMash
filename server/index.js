@@ -39,6 +39,7 @@ app.use('/app/active', express.static(path.resolve(__dirname + "/../app/flutter-
 app.get('/test', spotify.test);
 
 app.get('/api/mash/:id', socket.getMashPage);
+app.get('/api/name', spotify.name);
 
 
 //resources

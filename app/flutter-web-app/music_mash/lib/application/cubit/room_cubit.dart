@@ -65,17 +65,18 @@ class RoomCubit extends Cubit<RoomState> {
     });
   }
 
-  void start() {
+  void start() async {
     log("ROOM CUBIT START");
     //TODO: actually get the name
     emit(RoomState());
 
-    final name = "BB";
+    var name = "N/A";
 
     final uri = Uri.tryParse(href);
     final queryParams = uri?.queryParameters;
     final sessionId = queryParams?['sessionId'];
     var token = queryParams?['access_token'];
+
     log("found href");
     log(href);
     //   queryParams['access_token'];
@@ -88,6 +89,10 @@ class RoomCubit extends Cubit<RoomState> {
         token =
             "BQBrLyS1DRbSl-49QrLX23MQeKzPcubdWNVwKlGWP2PRNluFxNb8LZ7nuyn0KnXIxQd58sTmAcsJ2tIjT0XDfxfpbATClRKJuOWsR7s7YJKhYnRzyABCZEDu9Dizvkt_Yo7YXx_v4rGN9WKw16cEe-4uNZ9SC0gd6cNZ4CRiEJM";
       }
+    }
+
+    if (token != null) {
+      name = await Api.getDisplayName(token);
     }
 
     //  "BQBuy0d9XjZ3LJZZwXb7_jZobTo_eC3JLQgcvJz1fZn002WGNPb0mmME3YKT3fZ5FQAhYwB_guw5ud9IiMrZLtX3pY_4mmAJJJUQAWsFEkXqUMTeF_cvLW3Pn5MtAQ0CKc1R2uxfFZ_PlPBw0VuEQwTqGIS3vEg7A9cHdvJpufo";
