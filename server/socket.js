@@ -16,7 +16,10 @@ const getMashPage = (req, res) => {
     const offset = req.query.offset;
     const size = req.query.size;
     const sessionId = req.params.id;
-    res.json(mashes[sessionId].songs.slice(offset, size + offset));
+    const end = parseInt(offset) + parseInt(size);
+    const slice = mashes[sessionId].songs.slice(offset, end);
+    console.log(slice.length);
+    res.json(slice);
 }
 
 const createSocket = (server) => {
@@ -120,7 +123,7 @@ exports.createSocket = createSocket;
 exports.getMashPage = getMashPage;
 
 
-
+/*
 setInterval(() => {
     console.log("sessions: ")
     console.log(sessions);
@@ -129,4 +132,4 @@ setInterval(() => {
     console.log("mashes: ")
     console.log(mashes);
     console.log("-----")
-}, 10000);
+}, 10000);*/

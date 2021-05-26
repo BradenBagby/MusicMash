@@ -7,6 +7,7 @@ import 'package:music_mash/utilities/route_controller.dart';
 import 'package:music_mash/widgets/common/music_card.dart';
 
 class Mashed extends StatelessWidget {
+  bool hitLoad = false;
   @override
   Widget build(BuildContext context) {
     return BlocListener<RoomCubit, RoomState>(
@@ -73,8 +74,14 @@ class Mashed extends StatelessWidget {
         onNotification: (scrollInfo) {
           if (scrollInfo.metrics.pixels >= scrollInfo.metrics.maxScrollExtent &&
               state.loadingMore == false &&
-              state.hasMore) {
+              state.hasMore &&
+              !hitLoad) {
+            hitLoad = true;
+            log("load more");
             BlocProvider.of<RoomCubit>(context).loadMore();
+            Future.delayed(const Duration(milliseconds: 200)).then((value) {
+              hitLoad = false;
+            });
           }
           return true;
         },

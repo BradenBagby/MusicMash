@@ -22,7 +22,7 @@ const loadLibrary = async(tokens, io, sessionId) => {
             method: "GET",
             headers: { 'content-type': 'application/json', 'Accept': 'application/json', 'Authorization': `Bearer ${token}` },
         };
-
+        var count = 0;
         while (url != null) {
             try {
                 let result = await fetch(url, options);
@@ -46,7 +46,10 @@ const loadLibrary = async(tokens, io, sessionId) => {
 
                 continue;
             }
-            //  break; //TODO: remove to allow full thing to happen
+            if (count > 3) {
+                break; //TODO: remove to allow full thing to happen
+            }
+            count++;
         }
 
     }
