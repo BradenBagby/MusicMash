@@ -46,7 +46,7 @@ const loadLibrary = async(tokens, io, sessionId) => {
 
                 continue;
             }
-            break; //TODO: remove to allow full thing to happen
+            //  break; //TODO: remove to allow full thing to happen
         }
 
     }
