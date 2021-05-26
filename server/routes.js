@@ -1,4 +1,4 @@
-const uuid = require('uuid');
+const nanoid = require('nanoid');
 const path = require('path');
 const querystring = require('querystring');
 
@@ -10,7 +10,8 @@ const chooseRoom = (req, res) => {
 
 //create room if we have active token
 const createRoom = (req, res) => {
-    const roomID = uuid.v4();
+    const roomID = nanoid.nanoid(6).toUpperCase();
+    console.log(roomID);
     const token = req.query.access_token;
     const refreshToken = req.query.refresh_token;
     console.log(token);
@@ -32,7 +33,8 @@ const activeRoom = (req, res) => {
 
 //active room
 const joinRoom = (req, res) => {
-    res.json({ joinRoom: 'joinRoom' });
+    const filepath = __dirname + "/../app/pages/join-room.html";
+    res.sendFile(path.resolve(filepath));
 }
 
 
