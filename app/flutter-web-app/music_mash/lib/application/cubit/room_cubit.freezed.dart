@@ -21,12 +21,16 @@ class _$RoomStateTearOff {
       List<SessionUser> users = const [],
       String sessionId = "",
       String name = "Anonymous",
+      String mashingMessage = "",
+      List<SpotifyTrack> tracks = const [],
       bool mashing = false}) {
     return _RoomState(
       connected: connected,
       users: users,
       sessionId: sessionId,
       name: name,
+      mashingMessage: mashingMessage,
+      tracks: tracks,
       mashing: mashing,
     );
   }
@@ -41,6 +45,8 @@ mixin _$RoomState {
   List<SessionUser> get users => throw _privateConstructorUsedError;
   String get sessionId => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  String get mashingMessage => throw _privateConstructorUsedError;
+  List<SpotifyTrack> get tracks => throw _privateConstructorUsedError;
   bool get mashing => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -57,6 +63,8 @@ abstract class $RoomStateCopyWith<$Res> {
       List<SessionUser> users,
       String sessionId,
       String name,
+      String mashingMessage,
+      List<SpotifyTrack> tracks,
       bool mashing});
 }
 
@@ -74,6 +82,8 @@ class _$RoomStateCopyWithImpl<$Res> implements $RoomStateCopyWith<$Res> {
     Object? users = freezed,
     Object? sessionId = freezed,
     Object? name = freezed,
+    Object? mashingMessage = freezed,
+    Object? tracks = freezed,
     Object? mashing = freezed,
   }) {
     return _then(_value.copyWith(
@@ -93,6 +103,14 @@ class _$RoomStateCopyWithImpl<$Res> implements $RoomStateCopyWith<$Res> {
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      mashingMessage: mashingMessage == freezed
+          ? _value.mashingMessage
+          : mashingMessage // ignore: cast_nullable_to_non_nullable
+              as String,
+      tracks: tracks == freezed
+          ? _value.tracks
+          : tracks // ignore: cast_nullable_to_non_nullable
+              as List<SpotifyTrack>,
       mashing: mashing == freezed
           ? _value.mashing
           : mashing // ignore: cast_nullable_to_non_nullable
@@ -112,6 +130,8 @@ abstract class _$RoomStateCopyWith<$Res> implements $RoomStateCopyWith<$Res> {
       List<SessionUser> users,
       String sessionId,
       String name,
+      String mashingMessage,
+      List<SpotifyTrack> tracks,
       bool mashing});
 }
 
@@ -130,6 +150,8 @@ class __$RoomStateCopyWithImpl<$Res> extends _$RoomStateCopyWithImpl<$Res>
     Object? users = freezed,
     Object? sessionId = freezed,
     Object? name = freezed,
+    Object? mashingMessage = freezed,
+    Object? tracks = freezed,
     Object? mashing = freezed,
   }) {
     return _then(_RoomState(
@@ -149,6 +171,14 @@ class __$RoomStateCopyWithImpl<$Res> extends _$RoomStateCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      mashingMessage: mashingMessage == freezed
+          ? _value.mashingMessage
+          : mashingMessage // ignore: cast_nullable_to_non_nullable
+              as String,
+      tracks: tracks == freezed
+          ? _value.tracks
+          : tracks // ignore: cast_nullable_to_non_nullable
+              as List<SpotifyTrack>,
       mashing: mashing == freezed
           ? _value.mashing
           : mashing // ignore: cast_nullable_to_non_nullable
@@ -164,6 +194,8 @@ class _$_RoomState implements _RoomState {
       this.users = const [],
       this.sessionId = "",
       this.name = "Anonymous",
+      this.mashingMessage = "",
+      this.tracks = const [],
       this.mashing = false});
 
   @JsonKey(defaultValue: false)
@@ -178,13 +210,19 @@ class _$_RoomState implements _RoomState {
   @JsonKey(defaultValue: "Anonymous")
   @override
   final String name;
+  @JsonKey(defaultValue: "")
+  @override
+  final String mashingMessage;
+  @JsonKey(defaultValue: const [])
+  @override
+  final List<SpotifyTrack> tracks;
   @JsonKey(defaultValue: false)
   @override
   final bool mashing;
 
   @override
   String toString() {
-    return 'RoomState(connected: $connected, users: $users, sessionId: $sessionId, name: $name, mashing: $mashing)';
+    return 'RoomState(connected: $connected, users: $users, sessionId: $sessionId, name: $name, mashingMessage: $mashingMessage, tracks: $tracks, mashing: $mashing)';
   }
 
   @override
@@ -201,6 +239,11 @@ class _$_RoomState implements _RoomState {
                     .equals(other.sessionId, sessionId)) &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.mashingMessage, mashingMessage) ||
+                const DeepCollectionEquality()
+                    .equals(other.mashingMessage, mashingMessage)) &&
+            (identical(other.tracks, tracks) ||
+                const DeepCollectionEquality().equals(other.tracks, tracks)) &&
             (identical(other.mashing, mashing) ||
                 const DeepCollectionEquality().equals(other.mashing, mashing)));
   }
@@ -212,6 +255,8 @@ class _$_RoomState implements _RoomState {
       const DeepCollectionEquality().hash(users) ^
       const DeepCollectionEquality().hash(sessionId) ^
       const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(mashingMessage) ^
+      const DeepCollectionEquality().hash(tracks) ^
       const DeepCollectionEquality().hash(mashing);
 
   @JsonKey(ignore: true)
@@ -226,6 +271,8 @@ abstract class _RoomState implements RoomState {
       List<SessionUser> users,
       String sessionId,
       String name,
+      String mashingMessage,
+      List<SpotifyTrack> tracks,
       bool mashing}) = _$_RoomState;
 
   @override
@@ -236,6 +283,10 @@ abstract class _RoomState implements RoomState {
   String get sessionId => throw _privateConstructorUsedError;
   @override
   String get name => throw _privateConstructorUsedError;
+  @override
+  String get mashingMessage => throw _privateConstructorUsedError;
+  @override
+  List<SpotifyTrack> get tracks => throw _privateConstructorUsedError;
   @override
   bool get mashing => throw _privateConstructorUsedError;
   @override

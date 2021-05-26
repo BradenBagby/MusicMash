@@ -7,6 +7,7 @@ const constants = require('./constants');
 const routes = require('./routes');
 const path = require('path');
 const socket = require('./socket');
+const spotify = require('./spotify')
 
 const auth = require('./auth')
 
@@ -34,6 +35,8 @@ app.get('/app/join', routes.joinRoom);
 app.get('/app/:id', routes.activeRoom);
 app.get('/', routes.home);
 app.use('/app/active', express.static(path.resolve(__dirname + "/../app/flutter-web-app/music_mash/build/web/")))
+
+app.get('/test', spotify.test);
 
 
 //resources

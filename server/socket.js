@@ -1,4 +1,5 @@
 const socket = require('socket.io');
+const spotify = require('./spotify');
 
 var sessions = {}; // sessionId:[token]
 var connections = {}; // socketId:session
@@ -46,7 +47,7 @@ const createSocket = (server) => {
 
 
             //store under connecttions so we can clean up
-            connections[connectionId] = sessionId;
+            connections[String(connectionId)] = sessionId;
 
 
             //subscribe socket to sessionId room
@@ -65,33 +66,31 @@ const createSocket = (server) => {
                 tokens.push(element.token);
             });
             console.log(`all tokens: ${tokens}`)
+            spotify.loadLibrary(tokens, socket, sessionId);
 
-            //load all libararys for all tokens
-
-            //or them
-
-            //save to session tokens
-
-
-            //emit that we are done
+            socket.in(sessionId).emit('SESSION_LOADED', {
+                message: 'start'
+            });
         });
 
         ///handle disconnect
         socket.on('disconnect', () => { //remove and cleanup session if needed
             let existingSessionId = connections[connectionId];
-            console.log("disconnected from session: " + existingSessionId);
+            console.log("disconnected from session: " + existingSessionId + " with my id: " + connectionId);
             if (existingSessionId) {
 
                 //remove user from session
                 let session = sessions[existingSessionId];
                 console.log(session);
                 session = session.filter(function(el) { return String(el.id) != String(connectionId); });
+                sessions[existingSessionId] = session;
 
                 //remove session if its the last one
                 if (session.length < 1) {
                     delete sessions[existingSessionId];
-                    sessionUpdated(socket, existingSessionId);
                 }
+
+                sessionUpdated(socket, existingSessionId);
             }
 
             //remove connection

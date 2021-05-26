@@ -31,7 +31,8 @@ class MashShortInfo extends StatelessWidget {
             children: [
               CircularProgressIndicator(),
               SizedBox(height: 8),
-              Text("Mashing ...")
+              Text("Mashing ..."),
+              Text(state.mashingMessage)
             ],
           ),
         );

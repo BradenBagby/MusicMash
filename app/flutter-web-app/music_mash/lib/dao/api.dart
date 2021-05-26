@@ -56,6 +56,12 @@ class Api {
       log("SOCKET! disconnected");
     });
 
+    socket.on('SESSION_LOADED', (data) {
+      log("loaded data");
+      _sessionDataStreamController
+          .add({'type': "SESSION_LOADED", 'data': data});
+    });
+
     socket.on('SESSION_DONE', (data) {
       _sessionDataStreamController.add({"type": "SESSION_DONE"});
       socket.disconnect();

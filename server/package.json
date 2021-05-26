@@ -10,6 +10,7 @@
         "express": "^4.17.1",
         "http": "^0.0.1-security",
         "nanoid": "^3.1.23",
+        "node-fetch": "^2.6.1",
         "path": "^0.12.7",
         "querystring": "^0.2.1",
         "request": "^2.88.2",
