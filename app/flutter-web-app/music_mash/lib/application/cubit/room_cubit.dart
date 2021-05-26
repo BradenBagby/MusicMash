@@ -89,7 +89,7 @@ class RoomCubit extends Cubit<RoomState> {
         goHome();
       } else {
         token =
-            "BQBrLyS1DRbSl-49QrLX23MQeKzPcubdWNVwKlGWP2PRNluFxNb8LZ7nuyn0KnXIxQd58sTmAcsJ2tIjT0XDfxfpbATClRKJuOWsR7s7YJKhYnRzyABCZEDu9Dizvkt_Yo7YXx_v4rGN9WKw16cEe-4uNZ9SC0gd6cNZ4CRiEJM";
+            "BQAxzxBKAQmaksW4B_EAng2Y7XuGuizMFfcR8edS9l09zC5n6WUnS41zLqqbnl16z4oWAHrCOLaalnrA4R3bjCDOq89z7k82s18UVG0R69AyJTGDtTWvz3VeRW1oQB-_3pJdYOYYLv71-cz4RU7G0Zqo5ILipXZKEbo-MEvsrw8";
       }
     }
 

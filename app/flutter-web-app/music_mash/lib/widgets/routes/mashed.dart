@@ -69,6 +69,8 @@ class Mashed extends StatelessWidget {
   }
 
   Widget _mashList(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final maxAcross = width.toInt() ~/ 300;
     return BlocBuilder<RoomCubit, RoomState>(builder: (context, state) {
       return NotificationListener<ScrollNotification>(
         onNotification: (scrollInfo) {
@@ -87,7 +89,7 @@ class Mashed extends StatelessWidget {
         },
         child: GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: (MediaQuery.of(context).size.width % 300).toInt(),
+              crossAxisCount: maxAcross.toInt(),
             ),
             itemCount: state.tracks!.length,
             itemBuilder: (context, i) {

@@ -63,7 +63,7 @@ const loadLibrary = async(tokens, io, sessionId) => {
                 continue;
             }
             if (count > 3) {
-                // break; //TODO: remove to allow full thing to happen
+                break; //TODO: remove to allow full thing to happen
             }
             count++;
         }
