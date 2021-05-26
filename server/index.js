@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const constants = require('./constants');
 const routes = require('./routes');
 const path = require('path');
+const socket = require('./socket');
 
 const auth = require('./auth')
 
@@ -37,6 +38,9 @@ app.use('/app/active', express.static(path.resolve(__dirname + "/../app/flutter-
 
 //resources
 app.use('/resources', express.static(path.resolve(__dirname + "/../app/pages/resources/")))
+
+//socket
+socket.createSocket(server);
 
 server.listen(constants.PORT, () => {
     console.log("listening: " + constants.PORT);
