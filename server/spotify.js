@@ -5,7 +5,8 @@ const constants = require('./constants');
 
 const loadLibrary = async(tokens, io, sessionId) => {
 
-    let items = {};
+    var items = [];
+
 
 
 
@@ -14,6 +15,7 @@ const loadLibrary = async(tokens, io, sessionId) => {
         const token = tokens[i];
 
         var url = `${constants.SPOTIFY_BASE_URL}/me/tracks?offset=0&limit=50`;
+        var newItems = []; //keep track of our new items to replace old items
 
 
         console.log("loading libarry for token " + token);
@@ -29,7 +31,14 @@ const loadLibrary = async(tokens, io, sessionId) => {
                 let json = await result.json();
                 const newItems = json.items;
                 newItems.forEach(element => { //save each to map if doesnt exist
-                    items[element.track.id] = element.track;
+                    if (i == 0) { //first time we just add them all
+                        newItems.push(element.track);
+                    } else {
+                        //second time we only add it if it already exists
+                        if (items.filter(e => e.id == element.track.id).length > 0) {
+                            newItems.push(element.track);
+                        }
+                    }
                 });
                 url = json.next;
                 const message = `tracks ${json.offset}/${json.total} for user ${i + 1}/${tokens.length}`;
@@ -52,12 +61,14 @@ const loadLibrary = async(tokens, io, sessionId) => {
             count++;
         }
 
+        items = newItems;
+
     }
 
 
-    let itemArray = Object.values(items);
-    console.log("completed with " + Object.keys(items).length + " length");
-    io.to(sessionId).emit('SESSION_LOADED', { "message": `${Object.keys(items).length} similar songs`, data: itemArray.slice(0, 25) });
+
+    console.log("completed with " + items.length + " length");
+    io.to(sessionId).emit('SESSION_LOADED', { "message": `${items.length} similar songs`, data: items.slice(0, 25) });
     return itemArray;
 
 }
