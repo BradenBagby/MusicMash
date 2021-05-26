@@ -57,9 +57,8 @@ class Api {
     });
 
     socket.on('SESSION_LOADED', (data) {
-      log("loaded data");
       _sessionDataStreamController
-          .add({'type': "SESSION_LOADED", 'data': data});
+          .add({"type": "SESSION_LOADED", "data": data});
     });
 
     socket.on('SESSION_DONE', (data) {

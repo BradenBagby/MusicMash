@@ -3,7 +3,7 @@ const constants = require('./constants');
 
 
 
-const loadLibrary = async(tokens, socket, sessionId) => {
+const loadLibrary = async(tokens, io, sessionId) => {
 
     let items = {};
 
@@ -32,12 +32,15 @@ const loadLibrary = async(tokens, socket, sessionId) => {
                 const message = `tracks ${json.offset}/${json.total} for user ${i + 1}/${tokens.length}`;
                 console.log(message + " " + sessionId);
 
-                socket.in(sessionId).emit('SESSION_LOADED', { "message": message });
+                io.to(sessionId).emit('SESSION_LOADED', { "message": message });
 
             } catch (er) {
                 console.log("FAILED LOADING SOME DATA");
+
+                url = null;
                 console.log(er);
-                socket.in(sessionId).emit('SESSION_LOADED', { "message": "FAILED TO LOAD SOME DATA" });
+                io.to(sessionId).emit('SESSION_LOADED', { "message": "FAILED TO LOAD SOME DATA" });
+
                 continue;
             }
 
@@ -46,7 +49,7 @@ const loadLibrary = async(tokens, socket, sessionId) => {
     }
 
     console.log("completed with " + Object.keys(items).length + " length");
-    socket.in(sessionId).emit('SESSION_LOADED', { "message": `${Object.keys(items).length} similar songs`, data: items });
+    io.to(sessionId).emit('SESSION_LOADED', { "message": `${Object.keys(items).length} similar songs`, data: items });
 
 }
 

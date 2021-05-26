@@ -9,7 +9,7 @@ var mashes = {}; //sessionId : mashObject
 
 const sessionUpdated = (socket, sessionId) => {
     console.log("emit session updated: " + sessionId);
-    socket.in(sessionId).emit('session', sessions[sessionId]);
+    socket.to(sessionId).emit('session', sessions[sessionId]);
 }
 
 const createSocket = (server) => {
@@ -65,12 +65,10 @@ const createSocket = (server) => {
             session.forEach(element => {
                 tokens.push(element.token);
             });
-            console.log(`all tokens: ${tokens}`)
-            spotify.loadLibrary(tokens, socket, sessionId);
+            console.log(tokens);
+            spotify.loadLibrary(tokens, io, sessionId);
 
-            socket.in(sessionId).emit('SESSION_LOADED', {
-                message: 'start'
-            });
+
         });
 
         ///handle disconnect

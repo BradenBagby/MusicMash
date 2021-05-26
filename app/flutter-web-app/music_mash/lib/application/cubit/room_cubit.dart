@@ -34,9 +34,10 @@ class RoomCubit extends Cubit<RoomState> {
         usersUpdated(users);
       } else if (type == "SESSION_START") {
         emit(state.copyWith(mashing: true));
-      } else if (type == 'SESSION_DATA') {
-        final message = event['message'];
-        final tracks = event['data'];
+      } else if (type == 'SESSION_LOADED') {
+        final data = event['data'];
+        final message = data['message'];
+        final tracks = data['data'];
         if (tracks == null) {
           emit(state.copyWith(mashingMessage: message as String));
         } else {
@@ -57,7 +58,7 @@ class RoomCubit extends Cubit<RoomState> {
     final name = "BB";
     final sessionId = "sessionId"; //TOOD: get session ID from url
     final token =
-        "BQBKp6ISVRzEMkm9GQLpWbedRzl7QNHsBz5_4Pf9nKDJw7gHzLJONUgIpR7IUWjQP6CZGzNpGjfs81gSmAA5uN8p3RltttnJKxqeJbtTxJ3fzSqOyf5WvhfgRp3ApZYhOCvqY9K594gWAaLfAchC_43Hw0XiU1E7OaRWnZXCVVc";
+        "BQCeaJnZgz-thonpL7tbsRZpsjZSAOOkM1P6rmALzu_15OsPSP_iFpw-f-TxrsZon7hEeJGIaxEXSmNX6qr4dFH5BoEg6h2z3Xcw9ZkinXUHHJnwqUXJKATj7H21vIdCfn83fb41cL6UJN8YCgGIsNyaJJloM4rWDgsZa8M8Zwg";
     emit(state.copyWith(
         name: name,
         users: [],
