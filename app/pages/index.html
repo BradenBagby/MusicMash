@@ -33,12 +33,8 @@
     </style>
 
     <script defer>
-        function createRoom() {
-            window.location.href = window.location.href.replace('/app', '/app/create');
-        }
-
-        function joinRoom() {
-            window.location.href = window.location.href.replace('/app', '/app/join');
+        function loginWithSpotify() {
+            window.location.href = "/spotify";
         }
     </script>
     <script src="/resources/js/grid.js"></script>
@@ -55,8 +51,7 @@
             <br>
             <br>
 
-            <button type="button" class="btn btn-primary" onclick="createRoom()">Create Room</button>
-            <button type="button" class="btn btn-primary" onclick="joinRoom()">Join Room</button>
+            <button type="button" class="btn btn-primary" onclick="loginWithSpotify()">Login With Spotify</button>
 
         </div>
     </div>
