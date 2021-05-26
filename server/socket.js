@@ -3,7 +3,7 @@ const spotify = require('./spotify');
 
 var sessions = {}; // sessionId:[token]
 var connections = {}; // socketId:session
-var mashes = {}; //sessionId : mashObject
+var mashes = {}; //sessionId : (songs: mashObject, loading: false)
 
 
 
@@ -56,7 +56,7 @@ const createSocket = (server) => {
             sessionUpdated(socket, sessionId);
 
         });
-        socket.on('startMash', ({ sessionId }) => {
+        socket.on('startMash', async({ sessionId }) => {
             console.log("start mash for session: " + sessionId);
 
             //get all tokens
@@ -66,7 +66,11 @@ const createSocket = (server) => {
                 tokens.push(element.token);
             });
             console.log(tokens);
-            spotify.loadLibrary(tokens, io, sessionId);
+            mashes[sessionId] = { loading: true };
+            let songs = await spotify.loadLibrary(tokens, io, sessionId);
+            mashes[sessionId].songs = songs;
+            mashes[sessionId].loading = false;
+
 
 
         });
@@ -86,6 +90,11 @@ const createSocket = (server) => {
                 //remove session if its the last one
                 if (session.length < 1) {
                     delete sessions[existingSessionId];
+
+                    //remove mash if it exists
+                    if (existingSessionId in mashes) {
+                        delete mashes[existingSessionId];
+                    }
                 }
 
                 sessionUpdated(socket, existingSessionId);

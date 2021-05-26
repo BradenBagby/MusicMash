@@ -7,6 +7,9 @@ const loadLibrary = async(tokens, io, sessionId) => {
 
     let items = {};
 
+
+
+
     for (var i = 0; i < tokens.length; i++) {
         const token = tokens[i];
 
@@ -43,13 +46,16 @@ const loadLibrary = async(tokens, io, sessionId) => {
 
                 continue;
             }
-
+            break; //TODO: remove to allow full thing to happen
         }
 
     }
 
+
+    let itemArray = Object.values(items);
     console.log("completed with " + Object.keys(items).length + " length");
-    io.to(sessionId).emit('SESSION_LOADED', { "message": `${Object.keys(items).length} similar songs`, data: items });
+    io.to(sessionId).emit('SESSION_LOADED', { "message": `${Object.keys(items).length} similar songs`, data: itemArray.slice(0, 15) });
+    return itemArray;
 
 }
 
