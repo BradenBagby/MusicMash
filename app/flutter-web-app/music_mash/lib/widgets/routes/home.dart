@@ -14,9 +14,12 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<RoomCubit, RoomState>(
       listener: (context, state) {
-        if (state.tracks.isNotEmpty) {
+        if (state.mashing == false) {
           Navigator.of(context).pushReplacementNamed(RouteController.mashed);
         }
+      },
+      listenWhen: (before, after) {
+        return before.mashing == true && after.mashing == false;
       },
       child: Scaffold(
           body: Center(

@@ -87,7 +87,7 @@ class Mashed extends StatelessWidget {
         },
         child: GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 5,
+              crossAxisCount: (MediaQuery.of(context).size.width % 300).toInt(),
             ),
             itemCount: state.tracks.length,
             itemBuilder: (context, i) {
