@@ -15,9 +15,15 @@ const createRoom = (req, res) => {
 
 //active room
 const activeRoom = (req, res) => {
-    res.json({ activeRoom: 'activeRoom' });
+        res.json({ activeRoom: 'activeRoom' });
+    }
+    //active room
+const joinRoom = (req, res) => {
+    res.json({ joinRoom: 'joinRoom' });
 }
+
 
 exports.chooseRoom = chooseRoom;
 exports.createRoom = createRoom;
 exports.activeRoom = activeRoom;
+exports.joinRoom = joinRoom;

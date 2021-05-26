@@ -57,11 +57,11 @@
 
     <script defer>
         function createRoom() {
-
+            window.location.href = window.location.href.replace('/app', '/app/create');
         }
 
         function joinRoom() {
-
+            window.location.href = window.location.href.replace('/app', '/app/join');
         }
 
 
@@ -91,6 +91,20 @@
         }
         window.addEventListener("load", function() {
             setupGrid();
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const error = urlParams.get('error');
+            if (error) {
+                switch (error) {
+                    case "invalid_token":
+                    case "state_mismatch":
+                        alert("Invalid spotify login. Retry")
+                        window.location.href = window.Location.href.replace('/app', '/spotify');
+                        break;
+                    default:
+                        alert("error on page. Please try again later")
+                }
+            }
         });
     </script>
 </head>
@@ -105,8 +119,8 @@
             <br>
             <br>
 
-            <button type="button" class="btn btn-primary">Create Room</button>
-            <button type="button" class="btn btn-primary">Join Room</button>
+            <button type="button" class="btn btn-primary" onclick="createRoom()">Create Room</button>
+            <button type="button" class="btn btn-primary" onclick="joinRoom()">Join Room</button>
 
         </div>
     </div>

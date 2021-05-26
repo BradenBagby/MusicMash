@@ -28,6 +28,7 @@ app.get('/authResult', auth.authCallback);
 //app
 app.get('/app/', routes.chooseRoom);
 app.get('/app/create', routes.createRoom);
+app.get('/app/join', routes.joinRoom);
 app.get('/app/:id', routes.activeRoom);
 
 server.listen(constants.PORT, () => {

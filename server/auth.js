@@ -44,7 +44,7 @@ const authCallback = (req, res) => {
 
     //gaurd
     if (state === null || state !== storedState) {
-        res.redirect('/#' +
+        res.redirect('/?' +
             querystring.stringify({
                 error: 'state_mismatch'
             }));
@@ -71,7 +71,7 @@ const authCallback = (req, res) => {
 
         //gaurd
         if (error || response.statusCode != 200) {
-            res.redirect('/#' +
+            res.redirect('/?' +
                 querystring.stringify({
                     error: 'invalid_token'
                 }));
