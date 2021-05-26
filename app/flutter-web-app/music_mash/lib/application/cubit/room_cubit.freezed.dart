@@ -22,7 +22,7 @@ class _$RoomStateTearOff {
       String sessionId = "",
       String name = "Anonymous",
       String mashingMessage = "",
-      List<SpotifyTrack> tracks = const [],
+      List<SpotifyTrack>? tracks = null,
       int loadedOffset = 0,
       bool hasMore = false,
       String error = "",
@@ -54,7 +54,7 @@ mixin _$RoomState {
   String get sessionId => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get mashingMessage => throw _privateConstructorUsedError;
-  List<SpotifyTrack> get tracks => throw _privateConstructorUsedError;
+  List<SpotifyTrack>? get tracks => throw _privateConstructorUsedError;
   int get loadedOffset => throw _privateConstructorUsedError;
   bool get hasMore => throw _privateConstructorUsedError;
   String get error => throw _privateConstructorUsedError;
@@ -76,7 +76,7 @@ abstract class $RoomStateCopyWith<$Res> {
       String sessionId,
       String name,
       String mashingMessage,
-      List<SpotifyTrack> tracks,
+      List<SpotifyTrack>? tracks,
       int loadedOffset,
       bool hasMore,
       String error,
@@ -130,7 +130,7 @@ class _$RoomStateCopyWithImpl<$Res> implements $RoomStateCopyWith<$Res> {
       tracks: tracks == freezed
           ? _value.tracks
           : tracks // ignore: cast_nullable_to_non_nullable
-              as List<SpotifyTrack>,
+              as List<SpotifyTrack>?,
       loadedOffset: loadedOffset == freezed
           ? _value.loadedOffset
           : loadedOffset // ignore: cast_nullable_to_non_nullable
@@ -167,7 +167,7 @@ abstract class _$RoomStateCopyWith<$Res> implements $RoomStateCopyWith<$Res> {
       String sessionId,
       String name,
       String mashingMessage,
-      List<SpotifyTrack> tracks,
+      List<SpotifyTrack>? tracks,
       int loadedOffset,
       bool hasMore,
       String error,
@@ -222,7 +222,7 @@ class __$RoomStateCopyWithImpl<$Res> extends _$RoomStateCopyWithImpl<$Res>
       tracks: tracks == freezed
           ? _value.tracks
           : tracks // ignore: cast_nullable_to_non_nullable
-              as List<SpotifyTrack>,
+              as List<SpotifyTrack>?,
       loadedOffset: loadedOffset == freezed
           ? _value.loadedOffset
           : loadedOffset // ignore: cast_nullable_to_non_nullable
@@ -248,14 +248,14 @@ class __$RoomStateCopyWithImpl<$Res> extends _$RoomStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_RoomState implements _RoomState {
+class _$_RoomState with DiagnosticableTreeMixin implements _RoomState {
   const _$_RoomState(
       {this.connected = false,
       this.users = const [],
       this.sessionId = "",
       this.name = "Anonymous",
       this.mashingMessage = "",
-      this.tracks = const [],
+      this.tracks = null,
       this.loadedOffset = 0,
       this.hasMore = false,
       this.error = "",
@@ -277,9 +277,9 @@ class _$_RoomState implements _RoomState {
   @JsonKey(defaultValue: "")
   @override
   final String mashingMessage;
-  @JsonKey(defaultValue: const [])
+  @JsonKey(defaultValue: null)
   @override
-  final List<SpotifyTrack> tracks;
+  final List<SpotifyTrack>? tracks;
   @JsonKey(defaultValue: 0)
   @override
   final int loadedOffset;
@@ -297,8 +297,26 @@ class _$_RoomState implements _RoomState {
   final bool mashing;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'RoomState(connected: $connected, users: $users, sessionId: $sessionId, name: $name, mashingMessage: $mashingMessage, tracks: $tracks, loadedOffset: $loadedOffset, hasMore: $hasMore, error: $error, loadingMore: $loadingMore, mashing: $mashing)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'RoomState'))
+      ..add(DiagnosticsProperty('connected', connected))
+      ..add(DiagnosticsProperty('users', users))
+      ..add(DiagnosticsProperty('sessionId', sessionId))
+      ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('mashingMessage', mashingMessage))
+      ..add(DiagnosticsProperty('tracks', tracks))
+      ..add(DiagnosticsProperty('loadedOffset', loadedOffset))
+      ..add(DiagnosticsProperty('hasMore', hasMore))
+      ..add(DiagnosticsProperty('error', error))
+      ..add(DiagnosticsProperty('loadingMore', loadingMore))
+      ..add(DiagnosticsProperty('mashing', mashing));
   }
 
   @override
@@ -363,7 +381,7 @@ abstract class _RoomState implements RoomState {
       String sessionId,
       String name,
       String mashingMessage,
-      List<SpotifyTrack> tracks,
+      List<SpotifyTrack>? tracks,
       int loadedOffset,
       bool hasMore,
       String error,
@@ -381,7 +399,7 @@ abstract class _RoomState implements RoomState {
   @override
   String get mashingMessage => throw _privateConstructorUsedError;
   @override
-  List<SpotifyTrack> get tracks => throw _privateConstructorUsedError;
+  List<SpotifyTrack>? get tracks => throw _privateConstructorUsedError;
   @override
   int get loadedOffset => throw _privateConstructorUsedError;
   @override

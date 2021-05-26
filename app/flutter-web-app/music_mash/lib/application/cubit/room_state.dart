@@ -8,7 +8,7 @@ abstract class RoomState with _$RoomState {
       @Default("") String sessionId,
       @Default("Anonymous") String name,
       @Default("") String mashingMessage,
-      @Default([]) List<SpotifyTrack> tracks,
+      @Default(null) List<SpotifyTrack>? tracks,
       @Default(0) int loadedOffset,
       @Default(false) bool hasMore,
       @Default("") String error,

@@ -12,7 +12,7 @@ class Mashed extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<RoomCubit, RoomState>(
       listener: (context, state) {
-        if (state.tracks.isEmpty) {
+        if (state.tracks == null) {
           Navigator.of(context).pushReplacementNamed(RouteController.initial);
         }
 
@@ -89,9 +89,9 @@ class Mashed extends StatelessWidget {
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: (MediaQuery.of(context).size.width % 300).toInt(),
             ),
-            itemCount: state.tracks.length,
+            itemCount: state.tracks!.length,
             itemBuilder: (context, i) {
-              return MusicCard(state.tracks[i]);
+              return MusicCard(state.tracks![i]);
             }),
       );
     });

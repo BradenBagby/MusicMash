@@ -48,7 +48,8 @@ class RoomCubit extends Cubit<RoomState> {
         final message = data['message'];
         final tracks = data['data'];
         if (tracks == null) {
-          emit(state.copyWith(mashingMessage: message as String));
+          emit(
+              state.copyWith(mashingMessage: message as String, mashing: true));
         } else {
           final realData =
               List<Map<String, dynamic>>.from(tracks as Iterable<dynamic>);
@@ -56,6 +57,7 @@ class RoomCubit extends Cubit<RoomState> {
               realData.map((e) => SpotifyTrack.fromJson(e)).toList();
           emit(state.copyWith(
               mashingMessage: message as String,
+              mashing: false,
               tracks: realTracks,
               loadedOffset: tracks.length,
               hasMore: tracks.length ==
@@ -115,7 +117,7 @@ class RoomCubit extends Cubit<RoomState> {
       emit(state.copyWith(loadingMore: true));
       final newTracks = await Api.loadMoreTracks(state.sessionId,
           offset: offset, amount: amount);
-      final allTracks = List<SpotifyTrack>.from(state.tracks);
+      final allTracks = List<SpotifyTrack>.from(state.tracks ?? []);
       allTracks.addAll(newTracks);
       emit(state.copyWith(
           loadingMore: false,
