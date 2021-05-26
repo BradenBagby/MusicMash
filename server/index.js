@@ -4,6 +4,7 @@ const http = require('http');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const constants = require('./constants');
+const routes = require('./routes');
 
 const auth = require('./auth')
 
@@ -24,6 +25,10 @@ app.use(cookieParser());
 app.get('/spotify', auth.initAuth);
 app.get('/authResult', auth.authCallback);
 
+//app
+app.get('/app/', routes.chooseRoom);
+app.get('/app/create', routes.createRoom);
+app.get('/app/:id', routes.activeRoom);
 
 server.listen(constants.PORT, () => {
     console.log("listening: " + constants.PORT);

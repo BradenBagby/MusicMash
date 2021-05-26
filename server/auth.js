@@ -86,7 +86,7 @@ const authCallback = (req, res) => {
         res.cookie(constants.SPOTIFY_REFRESH_TOKEN_KEY, refresh_token);
 
         //redirect to web app, we are now ready for the fun stuff
-        res.redirect('/app/#' +
+        res.redirect('/app?' +
             querystring.stringify({
                 access_token: access_token,
                 refresh_token: refresh_token
