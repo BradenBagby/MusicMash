@@ -18,7 +18,7 @@ const createSocket = (server) => {
 
 
         ///handle receiving token and session ID
-        socket.on('token', ({ token, sessionId }) => {
+        socket.on('token', ({ token, sessionId, name }) => {
             console.log(`got token: ${token} session id: ${sessionId}`);
 
             //store under connecttions so we can clean up
@@ -28,7 +28,7 @@ const createSocket = (server) => {
             if (!(sessionId in sessions)) {
                 sessions[sessionId] = [];
             }
-            sessions[sessionId].push({ id: connectionId });
+            sessions[sessionId].push({ id: connectionId, token: token, name: name });
 
 
             //subscribe socket to sessionId room
