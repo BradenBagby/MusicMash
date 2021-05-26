@@ -8,7 +8,7 @@ const chooseRoom = (req, res) => {
     res.sendFile(path.resolve(filepath));
 }
 
-//create room if we have active token
+//create room if we have active token (there is a lot better way to do this  but in a hurry)
 const createRoom = (req, res) => {
     const roomID = nanoid.nanoid(6).toUpperCase();
     console.log(roomID);
@@ -22,13 +22,29 @@ const createRoom = (req, res) => {
             }));
         return;
     }
-    res.redirect('/app/' + roomID);
+    res.redirect('/app/' + roomID + '/?' + querystring.stringify({
+        access_token: token,
+        refresh_token: refreshToken
+    }));
 }
 
 
-//active room
+//active room (there is a lot better way to do this but in a hurry)
 const activeRoom = (req, res) => {
-    res.json({ activeRoom: 'activeRoom' });
+    const token = req.query.access_token;
+    const refreshToken = req.query.refresh_token;
+    console.log(token);
+    if (!token || !refreshToken) {
+        res.redirect('/?' +
+            querystring.stringify({
+                error: 'invalid_token'
+            }));
+        return;
+    }
+    res.redirect('/app/active/index.html?' + querystring.stringify({
+        access_token: token,
+        refresh_token: refreshToken
+    }));
 }
 
 //active room

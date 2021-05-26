@@ -32,6 +32,7 @@ app.get('/app/create', routes.createRoom);
 app.get('/app/join', routes.joinRoom);
 app.get('/app/:id', routes.activeRoom);
 app.get('/', routes.home);
+app.use('/app/active', express.static(path.resolve(__dirname + "/../app/flutter-web-app/music_mash/build/web/")))
 
 
 //resources
