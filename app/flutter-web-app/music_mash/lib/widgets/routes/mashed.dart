@@ -23,7 +23,7 @@ class Mashed extends StatelessWidget {
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
-          child: Icon(Icons.plus_one),
+          child: Text("Create Playlist"),
         ),
         body: Stack(
           children: [

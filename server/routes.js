@@ -33,8 +33,9 @@ const createRoom = (req, res) => {
 const activeRoom = (req, res) => {
     const token = req.query.access_token;
     const refreshToken = req.query.refresh_token;
+    const id = req.params.id;
     console.log(token);
-    if (!token || !refreshToken) {
+    if (!token || !refreshToken || !id) {
         res.redirect('/?' +
             querystring.stringify({
                 error: 'invalid_token'
@@ -43,7 +44,8 @@ const activeRoom = (req, res) => {
     }
     res.redirect('/app/active/index.html?' + querystring.stringify({
         access_token: token,
-        refresh_token: refreshToken
+        refresh_token: refreshToken,
+        sessionId: id
     }));
 }
 

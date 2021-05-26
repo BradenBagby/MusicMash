@@ -278,7 +278,7 @@ packages:
     source: hosted
     version: "1.0.0"
   js:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: js
       url: "https://pub.dartlang.org"

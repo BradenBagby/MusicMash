@@ -1,4 +1,6 @@
 import 'dart:developer';
+import 'package:js/js.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -11,6 +13,12 @@ import 'package:music_mash/utilities/route_controller.dart';
 
 part 'room_state.dart';
 part 'room_cubit.freezed.dart';
+
+@JS('window.location.href')
+external String href;
+
+@JS('goHome()')
+external void goHome();
 
 class RoomCubit extends Cubit<RoomState> {
   RoomCubit() : super(RoomState()) {
@@ -61,16 +69,30 @@ class RoomCubit extends Cubit<RoomState> {
     log("ROOM CUBIT START");
     //TODO: actually get the name
     emit(RoomState());
+
     final name = "BB";
-    final sessionId = "sessionId"; //TOOD: get session ID from url
-    final token =
-        "BQCeaJnZgz-thonpL7tbsRZpsjZSAOOkM1P6rmALzu_15OsPSP_iFpw-f-TxrsZon7hEeJGIaxEXSmNX6qr4dFH5BoEg6h2z3Xcw9ZkinXUHHJnwqUXJKATj7H21vIdCfn83fb41cL6UJN8YCgGIsNyaJJloM4rWDgsZa8M8Zwg";
+
+    final uri = Uri.tryParse(href);
+    final queryParams = uri?.queryParameters;
+    final sessionId = queryParams?['sessionId'];
+    final token = queryParams?['access_token'];
+    log("found href");
+    log(href);
+    //   queryParams['access_token'];
+
+    if (sessionId == null || token == null) {
+      log("go home");
+      if (kReleaseMode) {
+        goHome();
+      }
+    }
+    //  "BQBuy0d9XjZ3LJZZwXb7_jZobTo_eC3JLQgcvJz1fZn002WGNPb0mmME3YKT3fZ5FQAhYwB_guw5ud9IiMrZLtX3pY_4mmAJJJUQAWsFEkXqUMTeF_cvLW3Pn5MtAQ0CKc1R2uxfFZ_PlPBw0VuEQwTqGIS3vEg7A9cHdvJpufo";
     emit(state.copyWith(
       name: name,
       connected: false,
-      sessionId: sessionId,
+      sessionId: sessionId ?? "sessionDefault",
     ));
-    Api.connect(sessionId, token, name);
+    Api.connect(sessionId ?? "sessionDefault", token ?? "errorToken", name);
   }
 
   void usersUpdated(List<SessionUser> users) {
