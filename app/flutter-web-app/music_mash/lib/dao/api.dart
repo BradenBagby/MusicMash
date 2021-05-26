@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:music_mash/domain/track/spotify_track.dart';
 import 'package:music_mash/utilities/constants.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
 
@@ -13,12 +15,35 @@ class Api {
 
   static late io.Socket socket;
 
+  static final BaseOptions options = BaseOptions(
+    baseUrl: BASE_URL,
+    connectTimeout: 5000,
+    receiveTimeout: 3000,
+  );
+
+  static final Dio dio = Dio(options);
+
   static Future<void> startMash(String sessionId) async {
     _sessionDataStreamController.sink.add({"type": "SESSION_START"});
     socket.emit('startMash', [
       {'sessionId': sessionId}
     ]);
     log("emit start mash: $sessionId ");
+  }
+
+  static Future<List<SpotifyTrack>> loadMoreTracks(String sessionId,
+      {required int offset, required int amount}) async {
+    final url = Constants.HOST +
+        '/api/mash/${sessionId}/?size=${amount}&offset=${offset}';
+
+    final res = await dio.get(url);
+
+    if (res.statusCode != 200 || res.data == null) {
+      throw Exception();
+    }
+    final data = List<Map<String, dynamic>>.from(res.data as Iterable<dynamic>);
+    final tracks = data.map((e) => SpotifyTrack.fromJson(e)).toList();
+    return tracks;
   }
 
   static Future<bool> connect(

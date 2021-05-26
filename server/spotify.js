@@ -54,7 +54,7 @@ const loadLibrary = async(tokens, io, sessionId) => {
 
     let itemArray = Object.values(items);
     console.log("completed with " + Object.keys(items).length + " length");
-    io.to(sessionId).emit('SESSION_LOADED', { "message": `${Object.keys(items).length} similar songs`, data: itemArray.slice(0, 15) });
+    io.to(sessionId).emit('SESSION_LOADED', { "message": `${Object.keys(items).length} similar songs`, data: itemArray.slice(0, 25) });
     return itemArray;
 
 }

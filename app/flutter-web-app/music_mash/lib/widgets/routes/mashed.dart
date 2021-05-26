@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:music_mash/application/cubit/room_cubit.dart';
 import 'package:music_mash/utilities/route_controller.dart';
+import 'package:music_mash/widgets/common/music_card.dart';
 
 class Mashed extends StatelessWidget {
   @override
@@ -11,19 +14,54 @@ class Mashed extends StatelessWidget {
         if (state.tracks.isEmpty) {
           Navigator.of(context).pushReplacementNamed(RouteController.initial);
         }
+
+        if (state.error.isNotEmpty) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(state.error)));
+        }
       },
       child: Scaffold(
-        body: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                "Music Mash",
-                style: Theme.of(context).textTheme.headline2,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: Icon(Icons.plus_one),
+        ),
+        body: Stack(
+          children: [
+            Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "Music Mash",
+                    style: Theme.of(context).textTheme.headline2,
+                  ),
+                  SizedBox(height: 8),
+                  BlocBuilder<RoomCubit, RoomState>(
+                    builder: (context, state) {
+                      return Text(
+                        state.mashingMessage,
+                        style: Theme.of(context).textTheme.subtitle1,
+                      );
+                    },
+                  ),
+                  Expanded(child: _mashList(context))
+                ],
               ),
-              Expanded(child: _mashList(context))
-            ],
-          ),
+            ),
+            BlocBuilder<RoomCubit, RoomState>(builder: (context, state) {
+              if (state.loadingMore) {
+                return SizedBox.expand(
+                    child: Container(
+                  color: Colors.black.withAlpha(100),
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ));
+              }
+
+              return Container();
+            })
+          ],
         ),
       ),
     );
@@ -31,11 +69,24 @@ class Mashed extends StatelessWidget {
 
   Widget _mashList(BuildContext context) {
     return BlocBuilder<RoomCubit, RoomState>(builder: (context, state) {
-      return ListView.builder(
-          itemCount: state.tracks.length,
-          itemBuilder: (context, i) {
-            return Text(state.tracks[i].name);
-          });
+      return NotificationListener<ScrollNotification>(
+        onNotification: (scrollInfo) {
+          if (scrollInfo.metrics.pixels >= scrollInfo.metrics.maxScrollExtent &&
+              state.loadingMore == false &&
+              state.hasMore) {
+            BlocProvider.of<RoomCubit>(context).loadMore();
+          }
+          return true;
+        },
+        child: GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 5,
+            ),
+            itemCount: state.tracks.length,
+            itemBuilder: (context, i) {
+              return MusicCard(state.tracks[i]);
+            }),
+      );
     });
   }
 }

@@ -12,6 +12,13 @@ const sessionUpdated = (socket, sessionId) => {
     socket.to(sessionId).emit('session', sessions[sessionId]);
 }
 
+const getMashPage = (req, res) => {
+    const offset = req.query.offset;
+    const size = req.query.size;
+    const sessionId = req.params.id;
+    res.json(mashes[sessionId].songs.slice(offset, size + offset));
+}
+
 const createSocket = (server) => {
 
     const io = socket(server, {
@@ -110,6 +117,7 @@ const createSocket = (server) => {
 };
 
 exports.createSocket = createSocket;
+exports.getMashPage = getMashPage;
 
 
 
@@ -118,5 +126,7 @@ setInterval(() => {
     console.log(sessions);
     console.log("connections: ")
     console.log(connections);
+    console.log("mashes: ")
+    console.log(mashes);
     console.log("-----")
 }, 10000);

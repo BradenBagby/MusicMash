@@ -9,5 +9,9 @@ abstract class RoomState with _$RoomState {
       @Default("Anonymous") String name,
       @Default("") String mashingMessage,
       @Default([]) List<SpotifyTrack> tracks,
+      @Default(0) int loadedOffset,
+      @Default(false) bool hasMore,
+      @Default("") String error,
+      @Default(false) bool loadingMore,
       @Default(false) bool mashing}) = _RoomState;
 }
