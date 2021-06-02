@@ -52,6 +52,7 @@ class MashShortInfo extends StatelessWidget {
       child: Text("Continue Anyways"),
       onPressed: () {
         Api.startMash(BlocProvider.of<RoomCubit>(context).state.sessionId);
+        Navigator.pop(context);
       },
     );
 
