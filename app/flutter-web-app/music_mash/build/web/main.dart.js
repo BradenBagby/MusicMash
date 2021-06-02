@@ -18474,7 +18474,7 @@ return P.a6(null,r)}})
 return P.a7($async$ab0,r)},
 Og:function(a){var s=0,r=P.a8(t.N),q,p,o,n,m,l
 var $async$Og=P.a3(function(b,c){if(b===1)return P.a5(c,r)
-while(true)switch(s){case 0:p="http://localhost:7788"+("/api/name/?access_token="+a)
+while(true)switch(s){case 0:p="https://musicmash.app"+("/api/name/?access_token="+a)
 o=t.z
 n=H
 m=P
@@ -18488,7 +18488,7 @@ case 1:return P.a6(q,r)}})
 return P.a7($async$Og,r)},
 Oh:function(a,b,c){var s=0,r=P.a8(t.ow),q,p,o,n,m
 var $async$Oh=P.a3(function(d,e){if(d===1)return P.a5(e,r)
-while(true)switch(s){case 0:n="http://localhost:7788"+("/api/mash/"+a+"/?size="+b+"&offset="+c)
+while(true)switch(s){case 0:n="https://musicmash.app"+("/api/mash/"+a+"/?size="+b+"&offset="+c)
 s=3
 return P.ad($.ae5().Ac(0,n,t.z),$async$Oh)
 case 3:m=e
@@ -18505,7 +18505,7 @@ var $async$ab_=P.a3(function(d,e){if(d===1)return P.a5(e,r)
 while(true)switch(s){case 0:n=P.t(t.N,t.z)
 n.m(0,"transports",H.a(["websocket"],t.s))
 n.m(0,"path","/api/io")
-n=U.avU("http://localhost:7788",n)
+n=U.avU("https://musicmash.app",n)
 $.ib=n
 p=new P.N($.P,t.tr)
 o=new P.ay(p,t.VY)
@@ -56569,7 +56569,7 @@ r=L.d8("Join Code:",o,r.bZ(A.kB(o,o,C.p,o,o,o,o,o,o,o,o,o,o,C.H,o,o,!0,o,o,o,o,o
 q=K.aV(a).W.b
 q.toString
 p=t.E
-return M.dt(o,new T.ed(C.nF,T.ahM(H.a([T.nF(H.a([r,L.d8(n,o,q.bZ(A.kB(o,o,C.p,o,o,o,o,o,o,o,o,o,o,C.bw,o,o,!0,o,o,o,o,o,o,o)),o)],p),C.bc,C.bB,C.bC),T.S6(M.dt(o,o,o,o,o,o,o,o,o,o)),new E.uP("http://localhost:7788/app/"+n,-1,200,o)],p),C.bc),o),o,o,new S.ig(o,o,new F.d1(s,s,s,s),o,o,o,C.aw),o,o,o,o,o)},
+return M.dt(o,new T.ed(C.nF,T.ahM(H.a([T.nF(H.a([r,L.d8(n,o,q.bZ(A.kB(o,o,C.p,o,o,o,o,o,o,o,o,o,o,C.bw,o,o,!0,o,o,o,o,o,o,o)),o)],p),C.bc,C.bB,C.bC),T.S6(M.dt(o,o,o,o,o,o,o,o,o,o)),new E.uP("https://musicmash.app/app/"+n,-1,200,o)],p),C.bc),o),o,o,new S.ig(o,o,new F.d1(s,s,s,s),o,o,o,C.aw),o,o,o,o,o)},
 $C:"$2",
 $R:2,
 $S:386}
@@ -63726,7 +63726,7 @@ r($,"aBj","amA",function(){return P.bN('[()<>@,;:"\\\\/\\[\\]?={} \\t\\x00-\\x1F
 r($,"aBw","amF",function(){return P.bN("(?:"+$.amd().a+")*",!0)})
 r($,"ayL","ae8",function(){return F.fy("")})
 s($,"ay1","zB",function(){return P.ai2(t.d)})
-r($,"ay3","akT",function(){return B.afM("http://localhost:7788",5000,3000)})
+r($,"ay3","akT",function(){return B.afM("https://musicmash.app",5000,3000)})
 r($,"ay2","ae5",function(){var q=null,p=$.akT(),o=new U.Qo(q,new L.Cs(H.a([],H.S("q<o9>")),new L.tT(),new L.tT(),new L.tT()),q,new Q.Qd(),!1)
 o.cw$=p==null?B.afM("",q,q):p
 o.c3$=new B.OQ(H.a([],H.S("q<hi>")))
