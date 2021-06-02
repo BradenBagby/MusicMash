@@ -25,7 +25,7 @@ const initAuth = (req, res) => {
     res.clearCookie(constants.SPOTIFY_REFRESH_TOKEN_KEY);
     res.clearCookie(constants.SPOTIFY_TOKEN_KEY);
 
-    var scopes = 'user-read-private user-library-read';
+    var scopes = 'user-read-private user-library-read playlist-read-private';
     res.redirect('https://accounts.spotify.com/authorize?' +
         querystring.stringify({
             response_type: 'code',
