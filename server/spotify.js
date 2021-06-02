@@ -27,7 +27,7 @@ const loadLibrary = async(tokens, io, sessionId) => {
             const id = playlistIds[n];
             const prefix = `Loading playlist ${n}/${playlistIds.length} `;
             const songsInPlaylist = await getAllSongsInPlaylist(options, id, (update) => {
-                const message = `${prefix}got songs ${update} ${suffix}`;
+                const message = `${prefix}got songs ${update}${suffix}`;
                 console.log(message);
                 if (io != null) {
                     io.to(sessionId).emit('SESSION_LOADED', { "message": message });
@@ -39,7 +39,7 @@ const loadLibrary = async(tokens, io, sessionId) => {
 
         //get library
         const songsInLibrary = await getAllSongsInLibrary(options, (update) => {
-            const message = `Loading saved songs ${update} ${suffix}`;
+            const message = `Loading saved songs ${update}${suffix}`;
             console.log(message);
             if (io != null) {
                 io.to(sessionId).emit('SESSION_LOADED', { "message": message });
@@ -49,22 +49,23 @@ const loadLibrary = async(tokens, io, sessionId) => {
         //merge
         allSongs = allSongs.concat(songsInLibrary);
 
+        console.log("got all songs");
+        //console.log(allSongs)
+
 
         //intersect with last
         allSongs.forEach(element => { //save each to map if doesnt exist
             if (i == 0) { //first time we just add them all
-                intersectedItems.push(element.track);
+                intersectedItems.push(element);
             } else {
                 //second time we only add it if it already exists
-                if (items.filter(e => e.id == element.track.id).length > 0) {
-                    intersectedItems.push(element.track);
+                if (items.filter(e => e.id == element.id).length > 0) {
+                    intersectedItems.push(element);
                 }
             }
         });
 
         items = intersectedItems;
-
-        return items;
 
     }
 
